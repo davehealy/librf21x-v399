@@ -1,0 +1,98 @@
+<html>
+<head>
+<script src="jquery-2.1.1.min.js" type="text/javascript"></script>
+<h1>GMiaow</h1>
+
+<script>
+$(document).ready(function(){
+    // alert("Ready");
+    $("#btnOpen").on("click", function() {
+        $.ajax({
+            type: 'POST',
+            url: $("#url").val(),
+            data: JSON.stringify({"params": [$("#deviceType").val(), $("#path").val(), parseInt($("#min").val()), parseInt($("#max").val())], "jsonrpc": "2.0", "method": "open", "id": "1"}),
+            success: function(){},
+            error: function(){alert(arguments[2]);}
+        }); 
+    });
+
+    $("#btnClose").on("click", function() {
+        $.ajax({
+            type: 'POST',
+            url: $("#url").val(),
+            data: JSON.stringify({"params": [], "jsonrpc": "2.0", "method": "close", "id": "1"}),
+            success: function(){},
+            error: function(){alert(arguments[2]);}
+        }); 
+    });
+
+    $("#btnStartQuiz").on("click", function() {
+        $.ajax({
+            type: 'POST',
+            url: $("#url").val(),
+            data: JSON.stringify({"params": [$("#quizType").val(), parseInt($("#param1").val()), parseInt($("#param2").val())], "jsonrpc": "2.0", "method": "startQuiz", "id": "1"}),
+            success: function(){},
+            error: function(){alert(arguments[2]);}
+        }); 
+    });
+
+    $("#btnStopQuiz").on("click", function() {
+        $.ajax({
+            type: 'POST',
+            url: $("#url").val(),
+            data: JSON.stringify({"params": [], "jsonrpc": "2.0", "method": "stopQuiz", "id": "1"}),
+            success: function(){},
+            error: function(){alert(arguments[2]);}
+        }); 
+    });
+
+    $("#btnGetMessage").on("click", function() {
+        $.ajax({
+            type: 'POST',
+            url: $("#url").val(),
+            data: JSON.stringify({"params": [], "jsonrpc": "2.0", "method": "getMessage", "id": "1"}),
+            success: function(){$("#message").val(JSON.stringify(arguments[0]));},
+            error: function(){alert(arguments[2]);}
+        }); 
+    });
+}); 
+</script>
+</head>
+
+<body>
+
+<form>
+    URL:<input type="text" id="url" value="/cgi-bin/rpc-cgi.py"/>
+</form>
+
+<form>
+    <input type="button" id="btnOpen" value="open"/>
+    <input type="text" id="deviceType" value="RF21X_DT_RF218"/>
+    <input type="text" id="path" value="hid://"/>
+    <input type="text" id="min" value="1"/>
+    <input type="text" id="max" value="40"/>
+</form>
+
+<form>
+    <input type="button" id="btnClose" value="close"/>
+</form>
+
+<form>
+    <input type="button" id="btnStartQuiz" value="startQuiz"/>
+    <input type="text" id="quizType" value="RF21X_QT_Single"/>
+    <input type="text" id="param1" value="0"/>
+    <input type="text" id="param2" value="0"/>
+</form>
+
+<form>
+    <input type="button" id="btnStopQuiz" value="stopQuiz"/>
+</form>
+
+<form>
+    <input type="button" id="btnGetMessage" value="getMessage"/>
+</form>
+
+<textarea id="message" type="text" style="width:600;height:300;">Message</textarea>
+
+</body>
+</html>

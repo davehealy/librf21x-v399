@@ -1,0 +1,6 @@
+add_subdirectory(gsp)
+add_subdirectory(gsp-api)
+add_subdirectory(gsp-server)
+add_subdirectory(rf21x)
+add_subdirectory(rf21x-c)
+add_subdirectory(rf21x-wrap)

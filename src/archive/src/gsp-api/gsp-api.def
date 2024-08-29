@@ -1,0 +1,9 @@
+LIBRARY "gsp-api"
+EXPORTS
+
+gsp_getHidSerialNumber
+gsp_open
+gsp_close
+gsp_readData
+gsp_writeData
+gsp_flushReciveFIFO

@@ -1,0 +1,11 @@
+build
+doc/html
+libs
+.pyc
+\.svn
+CMakeLists.txt.user
+.DS_Store
+android/obj
+android/libs
+android/com
+

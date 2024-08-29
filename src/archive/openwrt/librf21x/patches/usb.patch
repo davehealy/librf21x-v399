@@ -1,0 +1,21 @@
+diff -r 4e1330a33dd4 src/gsp/hidapi/CMakeLists.txt
+--- a/src/gsp/hidapi/CMakeLists.txt Sat May 11 02:10:38 2013 +0800
++++ b/src/gsp/hidapi/CMakeLists.txt Sat May 11 02:15:45 2013 +0800
+@@ -10,14 +10,14 @@
+     add_library(hidapi STATIC mac/hid.c)
+     target_link_libraries(hidapi ${IOKit_PATH} ${CoreFoundation_PATH})
+ elseif(UNIX)
+-    option(USB_UDEV "Build hidapi with libudev other then libusb-1.0 (need linux kernel 3.0 or higher)." ON)
++    option(USB_UDEV "Build hidapi with libudev other then libusb-1.0 (need linux kernel 3.0 or higher)." OFF)
+     if(USB_UDEV)
+         add_library(hidapi STATIC linux/hid.c)
+-        target_link_libraries(hidapi udev)
++        target_link_libraries(hidapi udev iconv)
+     else()
+         find_package(libusb-1.0 REQUIRED)
+         add_library(hidapi STATIC linux/hid-libusb.c)
+         include_directories(${LIBUSB_1_INCLUDE_DIR})
+-        target_link_libraries(hidapi ${LIBUSB_1_LIBRARY})
++        target_link_libraries(hidapi ${LIBUSB_1_LIBRARY} iconv)
+     endif()
+ endif()
